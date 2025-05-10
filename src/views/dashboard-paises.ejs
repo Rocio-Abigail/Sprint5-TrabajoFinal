@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Países</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <header class="bg-blue-700 text-white py-4 shadow">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-2xl font-semibold">🌎 Dashboard de Países (Idioma Español)</h1>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4">
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="px-4 py-2 text-left">Bandera</th>
+            <th class="px-4 py-2 text-left">Nombre oficial</th>
+            <th class="px-4 py-2 text-left">Capital</th>
+            <th class="px-4 py-2 text-left">Fronteras</th>
+            <th class="px-4 py-2 text-left">Población</th>
+            <th class="px-4 py-2 text-right">Gini</th>
+            <th class="px-4 py-2 text-left">Área (km²)</th>
+            <th class="px-4 py-2 text-left">Zonas Horarias</th>
+            <th class="px-4 py-2 text-left">Creador</th>
+            <th class="px-4 py-2 text-left">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <% paises.forEach(pais => { %>
+            <tr class="hover:bg-gray-100 transition">
+              <td class="px-4 py-2">
+                <img src="<%= pais.flags?.png %>" alt="Bandera" class="w-10 h-6 object-cover">
+              </td>
+              <td class="px-4 py-2"><%= pais.name?.nativeName.spa.official %></td>
+              <!-- <td class="px-4 py-2"><%= pais.capital?.[0] || 'N/A' %></td> -->
+              <td class="px-4 py-2"><%= pais.capital?.join(', ') || '—' %></td>
+              <td class="px-4 py-2"><%= pais.borders?.join(', ') || '—' %></td>
+              <td class="px-4 py-2"><%= pais.population.toLocaleString() %></td>
+              <td class="px-4 py-2 text-right"><%= pais.area?.toLocaleString() || '—' %></td>
+              <td class="px-4 py-2 text-right"><%= pais.gini ?? '—' %></td>
+              <td class="px-4 py-2"><%= pais.timezones?.join(', ') || '—' %></td>
+              <td class="px-4 py-2"><%= pais.creador %></td>
+              <td class="px-4 py-2 flex gap-2">
+                <a href="/api/paises/<%= pais._id %>/edit" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded text-sm">
+                  ✏️ Editar
+                </a>
+                <form action="/paises/<%= pais._id %>?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este país?')">
+                  <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm" type="submit">
+                    🗑️ Eliminar
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          <tr class="bg-gray-100 font-semibold border-t border-gray-400">
+            <td colspan="3" class="px-4 py-2 text-right">Totales:</td>
+            <td class="px-4 py-2 text-right"><%= totalArea.toLocaleString() %></td>
+            <td class="px-4 py-2 text-right"><%= totalPoblacion.toLocaleString() %></td>
+            <td class="px-4 py-2 text-right"><%= promedioGini %></td>
+            <td colspan="3"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+

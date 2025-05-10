@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar País</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <div class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6">Editar País</h1>
+
+    <!-- Mostrar errores -->
+    <% if (errores.length > 0) { %>
+      <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <ul class="list-disc pl-5">
+          <% errores.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <form action="/paises/<%= pais._id %>?_method=PUT" method="POST" class="space-y-4">
+      <!-- Nombre oficial -->
+      <div>
+        <label for="name.official" class="block font-semibold">Nombre oficial:</label>
+        <input type="text" name="name[official]" id="name.official"
+               value="<%= pais.name?.official || '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Capital -->
+      <div>
+        <label for="capital" class="block font-semibold">Capital:</label>
+        <input type="text" name="capital" id="capital"
+               value="<%= pais.capital ? pais.capital.join(', ') : '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Fronteras -->
+      <div>
+        <label for="borders" class="block font-semibold">Fronteras:</label>
+        <input type="text" name="borders" id="borders"
+               value="<%= pais.borders ? pais.borders.join(', ') : '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Área -->
+      <div>
+        <label for="area" class="block font-semibold">Área:</label>
+        <input type="number" step="0.01" name="area" id="area"
+               value="<%= pais.area || '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Población -->
+      <div>
+        <label for="population" class="block font-semibold">Población:</label>
+        <input type="number" name="population" id="population"
+               value="<%= pais.population || '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Gini -->
+      <div>
+        <label for="gini" class="block font-semibold">Gini:</label>
+        <input type="number" step="0.01" name="gini" id="gini"
+               value="<%= giniValor || '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Creador -->
+      <div>
+        <label for="creador" class="block font-semibold">Creador:</label>
+        <input type="text" name="creador" id="creador"
+               value="<%= pais.creador || '' %>"
+               class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <!-- Botón -->
+      <div class="text-right">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Guardar cambios
+        </button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
+
+ 
