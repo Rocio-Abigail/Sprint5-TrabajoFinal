@@ -21,13 +21,15 @@
       </div>
     <% } %>
 
-    <form action="/paises/<%= pais._id %>?_method=PUT" method="POST" class="space-y-4">
+    <form action="/api/paises/<%= pais._id %>?_method=PUT" method="POST" class="space-y-4">
       <!-- Nombre oficial -->
       <div>
-        <label for="name.official" class="block font-semibold">Nombre oficial:</label>
-        <input type="text" name="name[official]" id="name.official"
-               value="<%= pais.name?.official || '' %>"
-               class="w-full border border-gray-300 rounded p-2">
+        <label for="officialName" class="block font-semibold">Nombre oficial:</label>
+     <input type="text" name="officialName" id="officialName"
+       value="<%= pais.name.official %>"
+       class="w-full border border-gray-300 rounded p-2">
+
+
       </div>
 
       <!-- Capital -->
@@ -40,7 +42,7 @@
 
       <!-- Fronteras -->
       <div>
-        <label for="borders" class="block font-semibold">Fronteras:</label>
+        <label for="borders" class="block font-semibold">Fronteras (separadas por coma):</label>
         <input type="text" name="borders" id="borders"
                value="<%= pais.borders ? pais.borders.join(', ') : '' %>"
                class="w-full border border-gray-300 rounded p-2">
@@ -66,8 +68,18 @@
       <div>
         <label for="gini" class="block font-semibold">Gini:</label>
         <input type="number" step="0.01" name="gini" id="gini"
-               value="<%= giniValor || '' %>"
-               class="w-full border border-gray-300 rounded p-2">
+       value="<%= giniValor %>"
+       class="w-full border border-gray-300 rounded p-2">
+
+      </div>
+
+          <!--Zonas Horarias -->
+      <div>
+        <label for="timezones" class="block font-semibold">Zonas Horarias (separadas por coma):</label>
+        <input type="text" name="timezones" id="timezones"
+               value="<%= pais.timezones ? pais.timezones.join(', ') : '' %>"
+               class="w-full border border-gray-300 rounded p-2"
+               placeholder="Ej: UTC−03:00, UTC−04:00">
       </div>
 
       <!-- Creador -->
@@ -78,16 +90,19 @@
                class="w-full border border-gray-300 rounded p-2">
       </div>
 
-      <!-- Botón -->
-      <div class="text-right">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          Guardar cambios
+      <!-- Botónes -->
+        <div class="flex items-center justify-between pt-4">
+        <button type="submit" class="bg-orange-500 hover:bg-orange-400 text-white-900 font-bold py-2 px-4 rounded">
+          Guardar Cambios
         </button>
+        <a href="/api/dashboard-paises" class="ml-4 inline-block bg-orange-700 hover:bg-orange-600 text-white-300 font-bold py-2 px-4 rounded">
+          Cancelar
+        </a>
       </div>
+
     </form>
   </div>
 
 </body>
 </html>
-
  
