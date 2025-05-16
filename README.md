@@ -26,20 +26,27 @@ Proyecto web que permite administrar información de países hispanohablantes, i
   ## 📦 Instalación
   
 1. Clonar repositorio y entrar a la carpeta
+   
 git clone https://github.com/Rocio-Abigail/Sprint5-TrabajoFinal.git
+
 cd src
 
 2. Instalar dependencias
+   
 npm install
 
-3. Configurar la conexión a MongoDB 
+3. Configurar la conexión a MongoDB
+   
 const uri = 'mongodb+srv://Grupo-13:grupo13@cursadanodejs.ls9ii.mongodb.net/Node-js'
 
 4. Cargar países desde la API
+   
 node scripts/importarPaises.mjs
 
 5. Iniciar la aplicación
+   
 npm start
+
 Abrir en el navegador: http://localhost:3000/paises
 
  ## ✍️ Autor
