@@ -1,13 +1,14 @@
-import express from 'express';
-import { connectDB } from './config/dbConfig.mjs';
-import paisesRoutes from './routes/paisesRoutes.mjs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import methodOverride from 'method-override';
-import expressLayouts from 'express-ejs-layouts';
+// Importación de módulos necesarios
+import express from 'express'; // Framework web para Node.js
+import { connectDB } from './config/dbConfig.mjs'; // Función para conectar a la base de datos MongoDB
+import paisesRoutes from './routes/paisesRoutes.mjs';// Función para conectar a la base de datos MongoDB
+import path from 'path'; // Módulo para trabajar con rutas de archivos
+import { fileURLToPath } from 'url'; // Necesario para obtener __dirname en ES Modules
+import methodOverride from 'method-override'; // Permite usar métodos HTTP como PUT y DELETE desde formularios HTML
+import expressLayouts from 'express-ejs-layouts';  // Middleware para usar layouts con EJS
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express(); // Crear la aplicación de Express
+const PORT = process.env.PORT || 3000; // Puerto por defecto o el definido en variables de entorno
 
 // Obtener la ruta del directorio actual (por usar módulos ES)
 const __filename = fileURLToPath(import.meta.url);
@@ -37,14 +38,15 @@ app.use(methodOverride('_method')); // este método permite solicitudes PUT en h
 // Conexión a base de datos
 connectDB();
 
-// Rutas
+// Registra las rutas bajo el prefijo "/api"
 app.use('/api', paisesRoutes);
 
+// Middleware para manejar rutas no definidas (Error 404)
 app.use((req, res) => {
     res.status(404).send({ mensaje: "Ruta no encontrada" });
 });
 
-// Iniciar servidor
+// Iniciar el servidor en el puerto especificado
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
