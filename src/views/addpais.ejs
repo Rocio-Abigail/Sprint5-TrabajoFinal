@@ -7,19 +7,15 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-  <header class="bg-blue-700 text-white py-4 shadow">
-    <div class="max-w-7xl mx-auto px-4">
-      <h1 class="text-2xl font-semibold"> Agregar nuevo país</h1>
-    </div>
-  </header>
 
   <main class="max-w-3xl mx-auto p-6 bg-white mt-6 shadow-md rounded-lg">
+     <h1 class="text-2xl font-bold mb-6">Agregar nuevo País</h1>
     <form action="/api/paises" method="POST" class="space-y-4">
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="block font-medium">Nombre Oficial</label>
-          <input name="name.official"  class="w-full border px-3 py-2 rounded" placeholder="Ej: República Argentina">
+          <input name="officialName"  class="w-full border px-3 py-2 rounded" placeholder="Ej: República Argentina">
         </div>
         <div>
           <label class="block font-medium">Capital</label>
@@ -46,18 +42,17 @@
           <input name="timezones" class="w-full border px-3 py-2 rounded" placeholder="Ej: UTC−03:00">
         </div>
         <div>
-          <label class="block font-medium">URL Bandera PNG</label>
-          <input name="flags.png" class="w-full border px-3 py-2 rounded" placeholder="https://flagcdn.com/w320/ar.png">
-        </div>
-        <div>
           <label class="block font-medium">Creador</label>
           <input name="creador"  class="w-full border px-3 py-2 rounded">
         </div>
       </div>
-
-      <div class="flex justify-between pt-4">
-        <a href="/api/dashboard-paises" class="text-blue-600 hover:underline">⬅️ Volver al dashboard</a>
-        <button class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">Guardar País</button>
+      <div class="flex items-center justify-between pt-4">
+        <button type="submit" class="bg-orange-500 hover:bg-orange-400 text-white-900 font-bold py-2 px-4 rounded">
+          Guardar Pais
+        </button>
+        <a href="/api/dashboard-paises" class="ml-4 inline-block bg-orange-700 hover:bg-orange-600 text-white-300 font-bold py-2 px-4 rounded">
+          Cancelar
+        </a>
       </div>
     </form>
   </main>
